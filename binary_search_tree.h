@@ -9,6 +9,8 @@
 #ifndef __G_FUN__
 #include "g_func.h"
 #endif
+
+//here the node imformation
 template<class T>
 struct bst_node{
 	bst_node<T> *lChild;
