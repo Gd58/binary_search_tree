@@ -28,16 +28,18 @@ public:
 	typedef typename __allocator<node, Alloc> allocator_t;
 public:
 	binary_search_tree() :root(nullptr){}
-	node* search_node(value_type lhs){
+	node* search_node(value_type lhs)
+	{
 		node *_tmp = nullptr;
 		node *_bst = root;
 		
-		while(_bst){
-		if(_bst->data == lhs||!_bst) break;
-		else if(_bst->data > lhs)
-		_bst = _bst->lChild;
-		else
-		_bst = _bst->rChild;
+		while(_bst)
+		{
+			if(_bst->data == lhs||!_bst) break;
+			else if(_bst->data > lhs)
+			_bst = _bst->lChild;
+			else
+			_bst = _bst->rChild;
 		}
 		return _bst;
 		/*
@@ -51,7 +53,8 @@ public:
 		return _bst;
 		*/
 	}
-	node* create_node(value_type lhs){
+	node* create_node(value_type lhs)
+	{
 		node* tmp =(node*) allocator_t::allocate();
 		construct(&tmp->data, lhs);
 		tmp->lChild = nullptr;
@@ -59,15 +62,18 @@ public:
 		tmp->parent = nullptr;
 		return tmp;
 	}
-	void insert_node(value_type lhs){
+	void insert_node(value_type lhs)
+	{
 		node* _tmp = root;
 		node* _cur_bst = nullptr;
 		node* result = create_node(lhs);
-		if (!_tmp) {
+		if (!_tmp) 
+		{
 			root = result;
 			return;
 		}
-		while (_tmp){
+		while (_tmp)
+		{
 			_cur_bst = _tmp;
 			if (_tmp->data > lhs)
 				_tmp = _tmp->lChild;
@@ -75,24 +81,23 @@ public:
 				_tmp = _tmp->rChild;
 		}
 		result->parent = _cur_bst;
-		if (_cur_bst == nullptr){
+		if (_cur_bst == nullptr)
 			root = result;
-		}
-		else if (_cur_bst->data > lhs){
+		else if (_cur_bst->data > lhs)
 			_cur_bst->lChild = result;
-		}
-		else{
+		else
 			_cur_bst->rChild = result;
-		}
 		
 	}
-	void __destory(node *lhs){
+	void __destory(node *lhs)
+	{
 		//static_assert(lhs != nullptr);
 		destory(&lhs->data);
 		allocator_t::deallocate(lhs);
 	}
 
-	void delete_node(value_type lhs){
+	void delete_node(value_type lhs)
+	{
 		node *tar_node = search_node(lhs);
 		if (tar_node->lChild == nullptr && tar_node->rChild != nullptr)
 			node_translant(tar_node, tar_node->rChild);
@@ -175,8 +180,9 @@ public:
 		
 
 
-	
-	void print(node* lhs){
+	/*here only to exam the procedure
+	void print(node* lhs)
+	{
 		if (lhs==nullptr) return;
 		print(lhs->lChild);
 		std::cout << lhs->data << std::endl;
