@@ -180,7 +180,7 @@ public:
 		
 
 
-	/*here only to exam the procedure
+	/*here only to exam the procedure*/
 	void print(node* lhs)
 	{
 		if (lhs==nullptr) return;
